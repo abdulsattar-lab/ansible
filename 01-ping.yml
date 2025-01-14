@@ -3,4 +3,4 @@
   tasks: #list of tasks/modules/collections
   - name: ping the server
     ansible.builtin.ping:
-    msg: "I m pinging to Node1 server
+      msg: "I m pinging to Node1 server
