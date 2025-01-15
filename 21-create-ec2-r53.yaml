@@ -6,11 +6,11 @@
    sg_id: "sg-033ab4b0d41e30711"
    ami_id: "ami-09c813fb71547fc4f"
    instances:
-   -mysql
-   -backend
-   -frontend
+   - mysql
+   - backend
+   - frontend
   tasks:
-   -name: create EC2 instance
+   - name: create EC2 instance
     amazon.aws.ec2_instance:
     name:
     subnet_id: "{{subnet_id}}"
