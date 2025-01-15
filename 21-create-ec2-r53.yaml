@@ -5,6 +5,7 @@
    subnet_id: "subnet-0ce2e2cb4185b90b0"
    sg_id: "sg-033ab4b0d41e30711"
    ami_id: "ami-09c813fb71547fc4f"
+   zone: ashu.shop
    instances:
    - mysql
    - backend
@@ -23,3 +24,15 @@
    - name: print the output
      ansible.builtin.debug:
       msg: "{{ ec2_instances }}"
+  #private IP R53
+   - name: create r53 private records
+     amazon.aws.route53:
+       state: present
+       zone: "{{ zone }}"
+       record: "{{ item.item }}.{{ zone }}" #mysql.ashu.shop
+       type: A
+       ttl: 1
+       value: "{{ item.instances[0].private_ip_address }}"
+       wait: true
+       overwrite: true
+    loop: "{{ ec2_instances.results }}"
